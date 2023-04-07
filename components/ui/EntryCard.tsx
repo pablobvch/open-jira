@@ -10,12 +10,15 @@ import {
 
 import { Entry } from "../../interfaces/entry";
 import { UIContext } from "../../context/ui";
+import { useRouter } from "next/router";
+import { dateFunctions } from "@/utils/";
 
 interface Props {
   entry: Entry;
 }
 
 export const EntryCard: FC<Props> = ({ entry }) => {
+  const router = useRouter();
   const { startDragging, endDragging } = useContext(UIContext);
 
   const onDragStart = (event: DragEvent<HTMLDivElement>) => {
@@ -27,8 +30,13 @@ export const EntryCard: FC<Props> = ({ entry }) => {
     endDragging();
   };
 
+  const onClick = () => {
+    router.push(`/entries/${entry._id}`);
+  };
+
   return (
     <Card
+      onClick={onClick}
       sx={{ marginBottom: 1 }}
       draggable
       onDragStart={onDragStart}
@@ -41,8 +49,12 @@ export const EntryCard: FC<Props> = ({ entry }) => {
           </Typography>
         </CardContent>
 
-        <CardActions>
-          <Typography>Hace 30 minutos</Typography>
+        <CardActions
+          sx={{ display: "flex", justifyContent: "end", paddingRight: 2 }}
+        >
+          <Typography variant="body2">
+            {dateFunctions.getFormatDistanceToNow(entry.createdAt)}
+          </Typography>
         </CardActions>
       </CardActionArea>
     </Card>

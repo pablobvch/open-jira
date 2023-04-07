@@ -19,5 +19,7 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "context/ui/UIContext.tsz"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "watch": true,
+  "diagnostics": true
 }

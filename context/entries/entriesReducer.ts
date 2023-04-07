@@ -3,7 +3,8 @@ import { EntryStatus } from "../../interfaces/entry";
 
 type EntriesActionType =
   | { type: "[Entry] Add-Entry"; payload: Entry }
-  | { type: "[Entry] Entry-Updated"; payload: Entry };
+  | { type: "[Entry] Entry-Updated"; payload: Entry }
+  | { type: "[Entry] Refresh-Data"; payload: Entry[] };
 
 export const entriesReducer = (
   state: EntriesState,
@@ -24,10 +25,15 @@ export const entriesReducer = (
             entry.status = action.payload.status;
             entry.description = action.payload.description;
           }
-          console.log({ entry });
           return entry;
         })
       };
+    case "[Entry] Refresh-Data": {
+      return {
+        ...state,
+        entries: [...action.payload]
+      };
+    }
     default:
       return state;
   }
