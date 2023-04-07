@@ -22,8 +22,7 @@ export const EntriesProvider: FC = ({ children }) => {
   const addNewEntry = async (description: string) => {
     try {
       const { data } = await entriesApi.post<Entry>("/entries", {
-        description: entry.description,
-        status: entry.status
+        description
       });
       dispatch({ type: "[Entry] Add-Entry", payload: data });
     } catch (error) {
@@ -61,6 +60,36 @@ export const EntriesProvider: FC = ({ children }) => {
     }
   };
 
+  const removeEntry = async (
+    { _id, description, status }: Entry,
+    showSnackbar: boolean = false
+  ) => {
+    try {
+      const { data } = await entriesApi.put<Entry>(`/entries/${_id}`, {
+        description,
+        status
+      });
+
+      if (showSnackbar) {
+        enqueueSnackbar("Entrada removida", {
+          variant: "success",
+          autoHideDuration: 1500,
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right"
+          }
+        });
+      }
+
+      dispatch({
+        type: "[Entry] Entry-Removed",
+        payload: data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const refreshEntries = async () => {
     const { data } = await entriesApi.get<Entry[]>("/entries");
     dispatch({ type: "[Entry] Refresh-Data", payload: data });
@@ -75,7 +104,8 @@ export const EntriesProvider: FC = ({ children }) => {
       value={{
         ...state,
         addNewEntry,
-        updateEntry
+        updateEntry,
+        removeEntry
       }}
     >
       {children}

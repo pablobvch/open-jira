@@ -26,6 +26,7 @@ import { isValidObjectId } from "mongoose";
 import { dbEntries } from "@/database";
 import { EntriesContext } from "@/context/entries";
 import { dateFunctions } from "@/utils";
+import { useRouter } from "next/router";
 
 const validStatus: EntryStatus[] = ["pending", "in-progress", "finished"];
 
@@ -38,7 +39,9 @@ const EntryPage: FC = ({ entry }) => {
   const [status, setStatus] = useState(entry.status);
   const [touch, setTouch] = useState(false);
 
-  const { updateEntry } = useContext(EntriesContext);
+  const { updateEntry, removeEntry } = useContext(EntriesContext);
+
+  const router = useRouter();
 
   // No es necesario memorizar los valores del state, porque son manejados por useState
   const isNotValid = useMemo(
@@ -64,6 +67,16 @@ const EntryPage: FC = ({ entry }) => {
     };
 
     updateEntry(updatedEntry, true);
+  };
+
+  const onRemoved = () => {
+    const removedEntry: Entry = {
+      ...entry,
+      status: "removed"
+    };
+
+    removeEntry(removedEntry, true);
+    router.push("/");
   };
 
   return (
@@ -123,6 +136,7 @@ const EntryPage: FC = ({ entry }) => {
         </Grid>
       </Grid>
       <IconButton
+        onClick={onRemoved}
         sx={{
           position: "fixed",
           bottom: 30,

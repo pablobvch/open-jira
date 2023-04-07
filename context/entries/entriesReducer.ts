@@ -21,9 +21,21 @@ export const entriesReducer = (
         ...state,
         entries: state.entries.map((entry) => {
           if (entry._id === action.payload._id) {
-            //solo modifico estas entradas, el resto las dejo como esta
+            //solo modifico esta entradas, el resto las dejo como esta
             entry.status = action.payload.status;
             entry.description = action.payload.description;
+          }
+          return entry;
+        })
+      };
+    case "[Entry] Entry-Removed":
+      return {
+        ...state,
+        entries: state.entries.map((entry) => {
+          if (entry._id === action.payload._id) {
+            //solo modifico esta entradas, el resto las dejo como esta
+            //podria ser simil a update pero solo me interesa el update el status
+            entry.status = action.payload.status;
           }
           return entry;
         })
