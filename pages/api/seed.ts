@@ -3,7 +3,7 @@ import { db, seedData } from "../../database";
 import { Entry } from "@/models";
 
 type Data = {
-  name: string;
+  message: string;
 };
 
 export default async function handler(

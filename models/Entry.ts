@@ -1,5 +1,5 @@
 import { Entry } from "@/interfaces";
-import { Schema } from "mongoose";
+import { Model, Schema } from "mongoose";
 import mongoose from "mongoose";
 
 export interface IEntry extends Entry {}

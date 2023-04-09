@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
   ok: boolean;
-  message: string;
+  message: string | string[];
 };
 
 export default function handler(

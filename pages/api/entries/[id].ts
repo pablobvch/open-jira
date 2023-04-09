@@ -2,13 +2,16 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { connect, disconnect } from "../../../database/db";
 import mongoose from "mongoose";
 import { db } from "@/database";
-import { Entry } from "@/models";
+import { Entry, IEntry } from "@/models";
 
 type Data = {
-  message: string;
+  message?: string;
 };
 
-const getEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const getEntry = async (
+  req: NextApiRequest,
+  res: NextApiResponse<Data | IEntry | null>
+) => {
   const { id } = req.query;
   await db.connect();
   const entry = await Entry.findById(id);
@@ -21,7 +24,10 @@ const getEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   return res.status(200).json(entry);
 };
 
-const updateEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const updateEntry = async (
+  req: NextApiRequest,
+  res: NextApiResponse<Data | IEntry | null>
+) => {
   const { id } = req.query;
 
   await db.connect();
@@ -35,7 +41,7 @@ const updateEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
   const {
     description = entryToUpdate.description,
-    status = entryToUpdate.sttatus
+    status = entryToUpdate.status
   } = req.body;
 
   try {
@@ -65,7 +71,7 @@ const updateEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data | IEntry | null>
 ) {
   const { id } = req.query;
   if (!mongoose.isValidObjectId(id)) {

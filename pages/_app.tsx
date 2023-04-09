@@ -5,7 +5,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { UIProvider } from "../context/ui";
 import { EntriesProvider } from "../context/entries";
 
-import { lightTheme, darkTheme } from "../themes";
+import { darkTheme } from "../themes";
 import { SnackbarProvider } from "notistack";
 
 function MyApp({ Component, pageProps }: AppProps) {

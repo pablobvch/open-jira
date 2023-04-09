@@ -26,7 +26,7 @@ export const UIProvider: FC<Props> = ({ children }) => {
 
   const closeSideMenu = () => dispatch({ type: "UI - Close Sidebar" });
 
-  const setIsAddingEntry = (isAddingEntry) =>
+  const setIsAddingEntry = (isAddingEntry: UIState["isAddingEntry"]) =>
     dispatch({ type: "UI - Set isAddingEntry", payload: isAddingEntry });
 
   const startDragging = () => dispatch({ type: "UI - Start Dragging" });

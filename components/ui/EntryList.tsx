@@ -1,5 +1,5 @@
 import { List, Paper } from "@mui/material";
-import React, { DragEvent, useMemo, useContext } from "react";
+import React, { DragEvent, useMemo, useContext, FC } from "react";
 import { EntryCard } from "./";
 import { Padding } from "@mui/icons-material";
 import { EntryStatus } from "../../interfaces/entry";
@@ -21,7 +21,7 @@ export const EntryList: FC<Props> = ({ status }) => {
     [entries, status]
   );
 
-  const allowDrop = (event: DragEvent<HTMLDivEvent>) => {
+  const allowDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
   };
 

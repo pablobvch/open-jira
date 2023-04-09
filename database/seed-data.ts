@@ -1,3 +1,5 @@
+import { EntryStatus } from "@/interfaces";
+
 interface SeedData {
   entries: SeedEntry[];
 }

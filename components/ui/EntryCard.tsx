@@ -1,4 +1,4 @@
-import React, { DragEvent, useContext } from "react";
+import React, { DragEvent, FC, useContext } from "react";
 
 import {
   Card,

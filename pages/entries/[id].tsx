@@ -16,7 +16,7 @@ import {
   TextField,
   IconButton
 } from "@mui/material";
-import React, { ChangeEvent, useContext, useMemo, useState } from "react";
+import React, { ChangeEvent, FC, useContext, useMemo, useState } from "react";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { Entry, EntryStatus } from "@/interfaces";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
@@ -27,6 +27,7 @@ import { dbEntries } from "@/database";
 import { EntriesContext } from "@/context/entries";
 import { dateFunctions } from "@/utils";
 import { useRouter } from "next/router";
+import { IEntry } from "@/models";
 
 const validStatus: EntryStatus[] = ["pending", "in-progress", "finished"];
 
@@ -34,7 +35,7 @@ interface Props {
   entry: IEntry;
 }
 
-const EntryPage: FC = ({ entry }) => {
+const EntryPage: FC<Props> = ({ entry }) => {
   const [inputValue, setInputValue] = useState(entry.description);
   const [status, setStatus] = useState(entry.status);
   const [touch, setTouch] = useState(false);
@@ -114,9 +115,7 @@ const EntryPage: FC = ({ entry }) => {
                       value={vs}
                       control={<Radio></Radio>}
                       label={capitalize(vs)}
-                    >
-                      {vs}
-                    </FormControlLabel>
+                    ></FormControlLabel>
                   ))}
                 </RadioGroup>
               </FormControl>
