@@ -2,6 +2,16 @@
 
 NextJS OpenJira App is a web application designed to manage tasks in a project management style, inspired by Jira. This application allows users to create, update, and delete tasks, as well as change their status between pending, in progress, and finished. Additionally, it features a drag-and-drop functionality for tasks between the three statuses, providing a visual way to track task progress.
 
+## Technology Stack
+
+This project is built using the following technologies:
+
+- **Next.js**: A React framework for building server-side rendered and static web applications.
+- **React**: A JavaScript library for building user interfaces.
+- **MongoDB**: A source-available cross-platform document-oriented database program.
+- **Docker**: An open-source platform for automating the deployment, scaling, and management of applications.
+- **Yarn**: A package manager for your code, similar to npm, but faster, more secure, and reliable.
+
 ## Prerequisites
 
 Before running the application locally, you need to have the database set up.
